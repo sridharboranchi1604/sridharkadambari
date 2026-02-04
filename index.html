@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sridhar & Kadambari | Wedding Invitation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --gold: #d4af37;
+  --bg-dark: #1a0000;
+  --bg-light: #4b0f0f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  background: linear-gradient(var(--bg-light), var(--bg-dark));
+  color: #f5deb3;
+  overflow-x: hidden;
+}
+
+/* Start Screen */
+#startScreen {
+  position: fixed;
+  inset: 0;
+  background: #2b0a0a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  color: #fff;
+  text-align: center;
+}
+
+#startScreen button {
+  background: var(--gold);
+  border: none;
+  padding: 14px 28px;
+  font-size: 18px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+/* Container */
+.container {
+  max-width: 420px;
+  margin: auto;
+  padding: 16px;
+  text-align: center;
+}
+
+/* Headings */
+h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 44px;
+  color: var(--gold);
+  margin: 10px 0;
+}
+
+h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Sections */
+.section {
+  margin: 24px 0;
+  padding: 18px;
+  border: 1.5px solid var(--gold);
+  border-radius: 18px;
+  background: rgba(0,0,0,0.35);
+}
+
+/* Diya */
+.diya {
+  width: 70px;
+  margin: 12px auto;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { filter: drop-shadow(0 0 6px gold); }
+  to { filter: drop-shadow(0 0 18px orange); }
+}
+
+/* Slideshow */
+.slideshow img {
+  width: 100%;
+  border-radius: 14px;
+  display: none;
+}
+
+.slideshow img.active {
+  display: block;
+}
+
+/* Couple */
+.couple {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.couple img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 3px solid var(--gold);
+  object-fit: cover;
+}
+
+/* Buttons */
+.btn {
+  width: 100%;
+  background: var(--gold);
+  border: none;
+  padding: 14px;
+  border-radius: 28px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+.btn:hover {
+  background: #ffd700;
+}
+
+/* Map */
+iframe {
+  width: 100%;
+  height: 200px;
+  border-radius: 14px;
+  border: none;
+}
+
+/* Flower */
+.flower {
+  position: fixed;
+  top: -40px;
+  font-size: 20px;
+  animation: fall linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Start Screen -->
+<div id="startScreen">
+  <h2>🪔 Welcome to Our Wedding</h2>
+  <button onclick="startInvitation()">Enter with Blessings</button>
+</div>
+
+<!-- Music -->
+<audio id="music" loop>
+  <source src="music/Vachindamma - SenSongsMp3.Co.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+
+<h2>|| श्री गणेशाय नमः ||</h2>
+<h1>Sridhar & Kadambari</h1>
+
+<img src="swastik.jpg" class="diya">
+
+<div class="section">
+  <p>
+    मंगलम् भगवान् विष्णुः<br>
+    मंगलम् गरुड़ध्वजः<br>
+    मंगलम् पुण्डरीकाक्षः<br>
+    मंगलाय तनो हरिः
+  </p>
+</div>
+
+<!-- Slideshow -->
+<div class="section slideshow">
+  <img src="kadambari.jpeg" class="active">
+  <img src="sridhar.jpg">
+  <img src="kadu3.jpeg">
+</div>
+
+<!-- Couple -->
+<div class="section couple">
+  <img src="kadu2.jpeg">
+  <img src="sridhar2.jpeg">
+</div>
+
+<div class="section">
+  <p><strong>📅 Date</strong><br>01 March 2026</p>
+  <p><strong>📍 Venue</strong><br>Bidar</p>
+</div>
+
+<div class="section">
+  <iframe src="https://www.google.com/maps?q=Bidar&output=embed"></iframe>
+</div>
+
+<button class="btn" onclick="rsvp()">💌 RSVP on WhatsApp</button>
+
+<p style="margin:20px 0;font-size:14px;">
+With blessings of our families,<br>
+we invite you to our sacred union 🛕
+</p>
+
+</div>
+
+<script>
+// Start + music
+function startInvitation() {
+  document.getElementById("music").play();
+  document.getElementById("startScreen").style.display = "none";
+}
+
+// Flowers
+for (let i = 0; i < 18; i++) {
+  let f = document.createElement("div");
+  f.className = "flower";
+  f.innerHTML = "🌸";
+  f.style.left = Math.random() * 100 + "vw";
+  f.style.animationDuration = 6 + Math.random() * 6 + "s";
+  document.body.appendChild(f);
+}
+
+// Slideshow
+let slides = document.querySelectorAll(".slideshow img");
+let current = 0;
+setInterval(() => {
+  slides[current].classList.remove("active");
+  current = (current + 1) % slides.length;
+  slides[current].classList.add("active");
+}, 3000);
+
+// RSVP
+function rsvp() {
+  window.open(
+    "https://wa.me/918722690436?text=Blessings%20to%20Sridhar%20and%20Kadambari%20on%20your%20wedding!"
+  );
+}
+</script>
+
+</body>
+</html>
