@@ -105,6 +105,34 @@ h2 {
   object-fit: cover;
 }
 
+/* COUNTDOWN STYLE */
+.countdown-box {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.time-box {
+  background: rgba(212,175,55,0.15);
+  border: 1px solid var(--gold);
+  border-radius: 10px;
+  padding: 10px;
+  min-width: 70px;
+}
+
+.time-box span {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--gold);
+  display: block;
+}
+
+.time-box small {
+  font-size: 12px;
+}
+
 .btn {
   width: 100%;
   background: var(--gold);
@@ -191,6 +219,17 @@ iframe {
   </p>
 </div>
 
+<!-- COUNTDOWN SECTION -->
+<div class="section">
+  <h2>⏳ Wedding Countdown</h2>
+  <div class="countdown-box">
+    <div class="time-box"><span id="days">0</span><small>Days</small></div>
+    <div class="time-box"><span id="hours">0</span><small>Hours</small></div>
+    <div class="time-box"><span id="minutes">0</span><small>Minutes</small></div>
+    <div class="time-box"><span id="seconds">0</span><small>Seconds</small></div>
+  </div>
+</div>
+
 <div class="section">
   <iframe 
     src="https://www.google.com/maps?q=Sadguru+Ganeshwara+Temple+Chouli+Bidar&output=embed"
@@ -215,6 +254,7 @@ function startInvitation() {
   document.getElementById("startScreen").style.display = "none";
 }
 
+// Flower Animation
 for (let i = 0; i < 18; i++) {
   let f = document.createElement("div");
   f.className = "flower";
@@ -224,6 +264,7 @@ for (let i = 0; i < 18; i++) {
   document.body.appendChild(f);
 }
 
+// Slideshow
 let slides = document.querySelectorAll(".slideshow img");
 let current = 0;
 setInterval(() => {
@@ -232,31 +273,40 @@ setInterval(() => {
   slides[current].classList.add("active");
 }, 3000);
 
+// LIVE COUNTDOWN
+const weddingDate = new Date("March 1, 2026 12:31:00").getTime();
+
+setInterval(function () {
+  const now = new Date().getTime();
+  const distance = weddingDate - now;
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  document.getElementById("days").innerHTML = days;
+  document.getElementById("hours").innerHTML = hours;
+  document.getElementById("minutes").innerHTML = minutes;
+  document.getElementById("seconds").innerHTML = seconds;
+
+}, 1000);
+
 function rsvp() {
-  window.open(
-    "https://wa.me/918722690436?text=Blessings%20to%20Sridhar%20and%20Kadambari%20on%20your%20wedding!"
-  );
+  window.open("https://wa.me/918722690436?text=Blessings%20to%20Sridhar%20and%20Kadambari%20on%20your%20wedding!");
 }
 
 function setAlarm() {
-
   const startDate = "20260301T123100";
-  const endDate   = "20260301T140000";
-
+  const endDate = "20260301T140000";
   const title = encodeURIComponent("Sridhar ❤️ Kadambari Wedding");
-  const details = encodeURIComponent(
-    "Join us for our sacred wedding ceremony at Sadguru Ganeshwara Temple."
-  );
-  const location = encodeURIComponent(
-    "Sadguru Ganeshwara Temple, Chouli, Bidar"
-  );
+  const details = encodeURIComponent("Join us for our sacred wedding ceremony at Sadguru Ganeshwara Temple.");
+  const location = encodeURIComponent("Sadguru Ganeshwara Temple, Chouli, Bidar");
 
   const url =
     `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${details}&location=${location}`;
 
   window.open(url, "_blank");
-
-  alert("Wedding reminder opened in your calendar 💛");
 }
 
 </script>
